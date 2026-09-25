@@ -1,0 +1,186 @@
+{
+  "users": [
+    {
+      "id": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "createdAt": "2026-03-17T15:21:24.899Z",
+      "updatedAt": "2026-03-17T15:21:24.899Z",
+      "clerkUserId": "user_30iog1j1gI6yLdAGuYxp45XBa0X",
+      "name": "MITANSHU SHAH",
+      "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zMGlvZzUzU0tzODlnaEJiSUg4UTNnejAwb2cifQ",
+      "email": "mitanshushah2007@gmail.com"
+    },
+    {
+      "id": "73809df9-77a4-41a1-8893-7e1fa69561a5",
+      "createdAt": "2026-03-25T12:43:55.460Z",
+      "updatedAt": "2026-03-25T12:43:55.460Z",
+      "clerkUserId": "user_3BKddyvOkSEk7qQ7QGOTwe3Yrfw",
+      "name": "Jay Mistry",
+      "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zMGltODBZZFpjZnFnRDdFVVRlTm11SlNCYWQiLCJyaWQiOiJ1c2VyXzNCS2RkeXZPa1NFazdxUTdRR09Ud2UzWXJmdyIsImluaXRpYWxzIjoiSk0ifQ",
+      "email": "jay.mistry1603@gmail.com"
+    },
+    {
+      "id": "39f289ef-c235-4bd8-8f5c-1dc59c1483f0",
+      "createdAt": "2026-03-25T12:43:55.774Z",
+      "updatedAt": "2026-03-25T12:43:55.774Z",
+      "clerkUserId": "user_3BKddyvOkSEk7qQ7QGOTwe3Yrfw",
+      "name": "Jay Mistry",
+      "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zMGltODBZZFpjZnFnRDdFVVRlTm11SlNCYWQiLCJyaWQiOiJ1c2VyXzNCS2RkeXZPa1NFazdxUTdRR09Ud2UzWXJmdyIsImluaXRpYWxzIjoiSk0ifQ",
+      "email": "jay.mistry1603@gmail.com"
+    },
+    {
+      "id": "29328a8f-d72c-42e7-bfc6-43d1c5f51a5c",
+      "createdAt": "2026-03-25T12:43:55.817Z",
+      "updatedAt": "2026-03-25T12:43:55.817Z",
+      "clerkUserId": "user_3BKddyvOkSEk7qQ7QGOTwe3Yrfw",
+      "name": "Jay Mistry",
+      "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zMGltODBZZFpjZnFnRDdFVVRlTm11SlNCYWQiLCJyaWQiOiJ1c2VyXzNCS2RkeXZPa1NFazdxUTdRR09Ud2UzWXJmdyIsImluaXRpYWxzIjoiSk0ifQ",
+      "email": "jay.mistry1603@gmail.com"
+    },
+    {
+      "id": "e6af5101-5ce8-4e4a-ae60-badce77cf92b",
+      "createdAt": "2026-03-25T12:43:55.831Z",
+      "updatedAt": "2026-03-25T12:43:55.831Z",
+      "clerkUserId": "user_3BKddyvOkSEk7qQ7QGOTwe3Yrfw",
+      "name": "Jay Mistry",
+      "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zMGltODBZZFpjZnFnRDdFVVRlTm11SlNCYWQiLCJyaWQiOiJ1c2VyXzNCS2RkeXZPa1NFazdxUTdRR09Ud2UzWXJmdyIsImluaXRpYWxzIjoiSk0ifQ",
+      "email": "jay.mistry1603@gmail.com"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "e1fed62f-8906-42ef-82da-63d39152e8c7",
+      "createdAt": "2026-03-17T15:31:51.741Z",
+      "updatedAt": "2026-03-23T05:00:28.204Z",
+      "name": "Mitanshu Shah",
+      "type": "CURRENT",
+      "balance": 71000.02,
+      "isDefault": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025"
+    },
+    {
+      "id": "4b208f2a-386f-424b-8fd3-acb03a11e1d0",
+      "createdAt": "2026-03-19T14:16:02.668Z",
+      "updatedAt": "2026-03-24T14:04:21.668Z",
+      "name": "Jay Mistry",
+      "type": "SAVINGS",
+      "balance": 9901,
+      "isDefault": true,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "b5663809-c25a-4daf-a27b-0ae32657aa66",
+      "createdAt": "2026-03-17T15:32:09.817Z",
+      "updatedAt": "2026-03-17T15:32:09.817Z",
+      "type": "INCOME",
+      "amount": 62500,
+      "description": "",
+      "date": "2026-03-17T15:31:51.940Z",
+      "accountId": "e1fed62f-8906-42ef-82da-63d39152e8c7",
+      "category": "salary",
+      "isRecurring": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "nextRecurringDate": null
+    },
+    {
+      "id": "ef711bf7-34ca-4248-aabc-6393f72f709a",
+      "createdAt": "2026-03-17T15:34:16.303Z",
+      "updatedAt": "2026-03-17T15:34:16.303Z",
+      "type": "EXPENSE",
+      "amount": 500,
+      "description": "",
+      "date": "2026-03-17T15:33:53.081Z",
+      "accountId": "e1fed62f-8906-42ef-82da-63d39152e8c7",
+      "category": "food",
+      "isRecurring": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "nextRecurringDate": null
+    },
+    {
+      "id": "741ab591-32be-4ce1-a9da-17526e84b3a7",
+      "createdAt": "2026-03-17T15:52:44.412Z",
+      "updatedAt": "2026-03-17T15:52:44.412Z",
+      "type": "INCOME",
+      "amount": 15000,
+      "description": "",
+      "date": "2026-03-17T15:52:24.654Z",
+      "accountId": "e1fed62f-8906-42ef-82da-63d39152e8c7",
+      "category": "rental",
+      "isRecurring": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "nextRecurringDate": null
+    },
+    {
+      "id": "43d0241a-be95-474e-8097-9ef26e9b630f",
+      "createdAt": "2026-03-17T15:56:55.497Z",
+      "updatedAt": "2026-03-17T15:56:55.497Z",
+      "type": "EXPENSE",
+      "amount": 1000,
+      "description": "",
+      "date": "2026-03-17T15:56:21.716Z",
+      "accountId": "e1fed62f-8906-42ef-82da-63d39152e8c7",
+      "category": "groceries",
+      "isRecurring": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "nextRecurringDate": null
+    },
+    {
+      "id": "cc3674d5-5351-4137-ab53-c9f36dea1545",
+      "createdAt": "2026-03-17T16:01:24.500Z",
+      "updatedAt": "2026-03-17T16:01:24.500Z",
+      "type": "EXPENSE",
+      "amount": 15000,
+      "description": "",
+      "date": "2026-03-17T16:00:44.607Z",
+      "accountId": "e1fed62f-8906-42ef-82da-63d39152e8c7",
+      "category": "shopping",
+      "isRecurring": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "nextRecurringDate": null
+    },
+    {
+      "id": "581a8366-9c95-4799-8d2e-494796c05304",
+      "createdAt": "2026-03-23T03:16:16.830Z",
+      "updatedAt": "2026-03-23T03:16:16.830Z",
+      "type": "EXPENSE",
+      "amount": 9999.98,
+      "description": "",
+      "date": "2026-03-23T03:15:38.567Z",
+      "accountId": "e1fed62f-8906-42ef-82da-63d39152e8c7",
+      "category": "housing",
+      "isRecurring": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "nextRecurringDate": null
+    },
+    {
+      "id": "adfa49f4-2533-4726-b33b-00c090daec01",
+      "createdAt": "2026-03-23T05:00:24.174Z",
+      "updatedAt": "2026-03-23T05:00:24.174Z",
+      "type": "EXPENSE",
+      "amount": 5000,
+      "description": "",
+      "date": "2026-03-23T04:59:24.437Z",
+      "accountId": "4b208f2a-386f-424b-8fd3-acb03a11e1d0",
+      "category": "groceries",
+      "isRecurring": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "nextRecurringDate": null
+    },
+    {
+      "id": "46db694e-1096-4bac-8efe-003c0aadb61e",
+      "createdAt": "2026-03-24T14:04:21.667Z",
+      "updatedAt": "2026-03-24T14:04:21.667Z",
+      "type": "EXPENSE",
+      "amount": 99,
+      "description": "",
+      "date": "2026-03-24T14:02:14.533Z",
+      "accountId": "4b208f2a-386f-424b-8fd3-acb03a11e1d0",
+      "category": "groceries",
+      "isRecurring": false,
+      "userId": "b5a8b774-3a63-4f34-86e0-bda9b01b1025",
+      "nextRecurringDate": null
+    }
+  ],
+  "budgets": []
+}
