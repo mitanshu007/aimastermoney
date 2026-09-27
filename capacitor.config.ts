@@ -3,7 +3,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
 const config: CapacitorConfig = {
   appId: "com.mitanshu.welth",
   appName: "Welth",
-  webDir: "out",
+  webDir: "public",
   server: {
     url: "https://aimastermoney-hvdj.vercel.app",
     cleartext: false,
