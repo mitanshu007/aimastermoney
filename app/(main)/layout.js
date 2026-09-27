@@ -27,8 +27,25 @@ export default function MainLayout({ children }) {
           </nav>
           <div className="pt-10"><Link href="/" className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-400 hover:text-slate-900"><ArrowLeft className="h-4 w-4" /> Back to website</Link></div>
         </aside>
-        <section className="min-w-0 flex-1">{children}</section>
+        <section className="min-w-0 flex-1 w-full">{children}</section>
       </div>
+
+      <nav className="fixed bottom-0 inset-x-0 z-40 border-t border-slate-200 bg-white/95 px-2 pb-[env(safe-area-inset-bottom)] pt-2 backdrop-blur-xl lg:hidden">
+        <div className="mx-auto grid max-w-md grid-cols-5 gap-1">
+          {[
+            { href: "/dashboard", label: "Home", icon: Home },
+            { href: "/transaction", label: "Activity", icon: BarChart3 },
+            { href: "/transaction/create", label: "Add", icon: Plus },
+            { href: "/account", label: "Accounts", icon: WalletCards },
+            { href: "/ai-advisor", label: "AI", icon: Sparkles },
+          ].map(({ href, label, icon: Icon }) => (
+            <Link key={href} href={href} className="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] font-bold text-slate-500 transition hover:bg-slate-50 hover:text-indigo-600">
+              <Icon className="h-5 w-5" />
+              <span>{label}</span>
+            </Link>
+          ))}
+        </div>
+      </nav>
     </div>
   );
 }
