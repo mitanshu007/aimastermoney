@@ -47,7 +47,7 @@ function getFunctionCalls(interaction) {
   return (interaction?.steps || []).filter((step) => step?.type === "function_call");
 }
 
-async function runGeminiAgent({ userId, input }) {
+async function runGeminiAgent({ userId, input, responseFormat = null }) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("Gemini AI is not configured on the server.");
 
@@ -66,6 +66,7 @@ async function runGeminiAgent({ userId, input }) {
       system_instruction: SYSTEM_PROMPT,
       generation_config: { thinking_level: "medium" },
       store: false,
+      ...(responseFormat ? { response_format: responseFormat } : {}),
     };
 
     const response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
@@ -148,7 +149,24 @@ Use tools whenever a financial fact is needed. Return ONLY valid JSON with exact
 Do not give investment, tax filing, or legal conclusions. Do not invent missing data.
 `;
 
-  const answer = await runGeminiAgent({ userId, input: prompt });
+  const answer = await runGeminiAgent({
+    userId,
+    input: prompt,
+    responseFormat: {
+      type: "text",
+      mime_type: "application/json",
+      schema: {
+        type: "object",
+        properties: {
+          summary: { type: "string" },
+          insights: { type: "array", items: { type: "string" }, maxItems: 5 },
+          actions: { type: "array", items: { type: "string" }, maxItems: 3 },
+          watchouts: { type: "array", items: { type: "string" }, maxItems: 3 },
+        },
+        required: ["summary", "insights", "actions", "watchouts"],
+      },
+    },
+  });
 
   const cleaned = answer.replace(/^\`\`\`(?:json)?\s*/i, "").replace(/\s*\`\`\`$/i, "").trim();
 
