@@ -1,5 +1,5 @@
 import { getUserAccounts } from "@/actions/dashboard";
-import { AccountCard } from "./_components/account-card";
+import { AccountCard } from "../dashboard/_components/account-card";
 import { CreateAccountDrawer } from "@/components/create-account-drawer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus, WalletCards } from "lucide-react";
