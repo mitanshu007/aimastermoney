@@ -1,70 +1,37 @@
 "use client";
-import { SignedOut, SignedIn, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "./ui/button";
-import { LayoutDashboard, PenBox } from "lucide-react";
+import { ArrowRight, LayoutDashboard, Plus } from "lucide-react";
 
-const Header = () => {
-  /* LOGO */ 
+export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b">
-      <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/log1.png"
-            alt="welth logo"
-            width={50}
-            height={50}
-            className="object-contain"
-            priority
-          />
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="group flex items-center gap-2.5">
+          <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-slate-950 shadow-sm">
+            <Image src="/log1.png" alt="Welth" width={36} height={36} className="object-contain" priority />
+          </div>
+          <div><span className="block text-base font-black tracking-tight text-slate-950">WELTH</span><span className="hidden text-[9px] font-semibold uppercase tracking-[.22em] text-slate-400 sm:block">Money, made clear</span></div>
         </Link>
-           {/* left hand site of logo */}
-        <div className="flex items-center space-x-4">
-          <SignedIn>
-            <Link href={"/dashboard"} className="text-gray-700 hover:text-blue-900 flex items-center gap-2 ">
-            <Button variant="outline">
-              <LayoutDashboard size={18}/>
-              <span className="hidden md:inline"> Dashboard </span>
-            </Button>
-            </Link>
-
-             <Link href={"/transaction/create"}>
-            <Button  className="flex items-center gap-2">
-              <PenBox size={18}/>
-              <span className="hidden md:inline"> Add Transaction </span>
-            </Button>
-            </Link>
-
-          </SignedIn>
-          {/* Sign In , Sign Up */}
+        <div className="hidden items-center gap-7 md:flex">
+          <Link href="/#features" className="text-sm font-medium text-slate-600 transition hover:text-slate-950">Features</Link>
+          <Link href="/#workflow" className="text-sm font-medium text-slate-600 transition hover:text-slate-950">How it works</Link>
+          <Link href="/#security" className="text-sm font-medium text-slate-600 transition hover:text-slate-950">Security</Link>
+        </div>
+        <div className="flex items-center gap-2">
           <SignedOut>
-            <Link href="/sign-in">
-              <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-green-700 transition-colors">
-                Sign In
-              </button>
-            </Link>
-            <Link href="/sign-up">
-              <button className="px-4 py-2 text-sm font-medium text-blue-600 border border-blue-800 rounded-md hover:bg-blue-50 transition-colors">
-                Sign Up
-              </button>
-            </Link>
+            <Link href="/sign-in" className="hidden rounded-xl px-3.5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 sm:inline-flex">Sign in</Link>
+            <Link href="/sign-up" className="inline-flex items-center gap-2 rounded-xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800">Get started <ArrowRight className="h-4 w-4" /></Link>
           </SignedOut>
-          {/* Account logo */}
           <SignedIn>
-            <UserButton appearance={
-              {
-                elements:{
-                  avatarBox: "w-10 h-10 ",
-                }
-              }
-            } />
+            <Link href="/dashboard" className="hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 sm:inline-flex"><LayoutDashboard className="h-4 w-4" /> Dashboard</Link>
+            <Link href="/transaction/create" className="inline-flex items-center gap-2 rounded-xl bg-slate-950 px-3.5 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"><Plus className="h-4 w-4" /> <span className="hidden sm:inline">Transaction</span></Link>
+            <UserButton appearance={{ elements: { avatarBox: "h-9 w-9" } }} />
           </SignedIn>
         </div>
       </nav>
     </header>
   );
-};
-
-export default Header;
+}
