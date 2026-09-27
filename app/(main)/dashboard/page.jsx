@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, ArrowDownRight, ArrowUpRight, Wallet, Activity, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { formatCurrency } from "@/lib/format-currency";
+import { AiInsights } from "@/components/ai-insights";
 
 export default async function DashboardPage() {
   const [user, accountsData, transactionsData] = await Promise.all([currentUser(), getUserAccounts(), getDashboardData()]);
@@ -55,6 +56,7 @@ export default async function DashboardPage() {
       ) : (
         <>
           <div className="mt-6"><BudgetProgress initialBudget={budgetData?.budget} currentExpenses={budgetData?.currentExpenses || 0} /></div>
+          <AiInsights />
           <div className="mt-6"><DashboardOverview accounts={accounts} transactions={transactions} /></div>
           <div className="mt-6">
             <div className="mb-4"><h2 className="text-xl font-black tracking-tight">Your accounts</h2><p className="text-sm text-slate-500">Choose a default account and drill into its activity.</p></div>
