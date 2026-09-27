@@ -1,12 +1,13 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { BarChart3, Home, Plus, ArrowLeft, WalletCards } from "lucide-react";
+import { BarChart3, Home, Plus, ArrowLeft, WalletCards, Sparkles } from "lucide-react";
 
 const navItems = [
   { href: "/dashboard", label: "Overview", icon: Home },
   { href: "/transaction", label: "Transactions", icon: BarChart3 },
   { href: "/account", label: "Accounts", icon: WalletCards },
+  { href: "/ai-advisor", label: "AI Advisor", icon: Sparkles },
 ];
 
 export default function MainLayout({ children }) {
