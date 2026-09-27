@@ -4,11 +4,9 @@ import { auth } from "@clerk/nextjs/server";
 import { getOrCreateUser } from "@/lib/get-or-create-user";
 import { db } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import aj from "@/lib/arcjet";
 import { request } from "@arcjet/next";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const serializeAmount = (obj) => ({
   ...obj,
@@ -208,63 +206,71 @@ export async function getUserTransactions(query = {}) {
   }
 }
 
-// Scan Receipt
+// Scan Receipt with Gemini vision
 export async function scanReceipt(file) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) throw new Error("Gemini AI is not configured.");
 
-    // Convert File to ArrayBuffer
     const arrayBuffer = await file.arrayBuffer();
-    // Convert ArrayBuffer to Base64
     const base64String = Buffer.from(arrayBuffer).toString("base64");
 
     const prompt = `
-      Analyze this receipt image and extract the following information in JSON format:
-      - Total amount (just the number)
-      - Date (in ISO format)
-      - Description or items purchased (brief summary)
-      - Merchant/store name
-      - Suggested category (one of: housing,transportation,groceries,utilities,entertainment,food,shopping,healthcare,education,personal,travel,insurance,gifts,bills,other-expense )
-      
-      Only respond with valid JSON in this exact format:
+Analyze this receipt image and extract the following information.
+Return ONLY valid JSON:
+{
+  "amount": number,
+  "date": "ISO date string",
+  "description": "brief summary",
+  "merchantName": "string",
+  "category": "one of: housing,transportation,groceries,utilities,entertainment,food,shopping,healthcare,education,personal,travel,insurance,gifts,bills,other-expense"
+}
+If this is not a receipt, return {}.
+`;
+
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=" +
+        encodeURIComponent(apiKey),
       {
-        "amount": number,
-        "date": "ISO date string",
-        "description": "string",
-        "merchantName": "string",
-        "category": "string"
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{
+            parts: [
+              { inlineData: { data: base64String, mimeType: file.type || "image/jpeg" } },
+              { text: prompt },
+            ],
+          }],
+          generationConfig: {
+            temperature: 0.1,
+            maxOutputTokens: 500,
+            responseMimeType: "application/json",
+          },
+        }),
+        cache: "no-store",
       }
+    );
 
-      If its not a recipt, return an empty object
-    `;
+    if (!response.ok) throw new Error("Gemini receipt scan failed.");
 
-    const result = await model.generateContent([
-      {
-        inlineData: {
-          data: base64String,
-          mimeType: file.type,
-        },
-      },
-      prompt,
-    ]);
+    const payload = await response.json();
+    const text = payload?.candidates?.[0]?.content?.parts
+      ?.map((part) => part.text || "")
+      .join("")
+      .trim();
 
-    const response = await result.response;
-    const text = response.text();
-    const cleanedText = text.replace(/```(?:json)?\n?/g, "").trim();
+    if (!text) throw new Error("Gemini returned no receipt data.");
 
-    try {
-      const data = JSON.parse(cleanedText);
-      return {
-        amount: parseFloat(data.amount),
-        date: new Date(data.date),
-        description: data.description,
-        category: data.category,
-        merchantName: data.merchantName,
-      };
-    } catch (parseError) {
-      console.error("Error parsing JSON response:", parseError);
-      throw new Error("Invalid response format from Gemini");
-    }
+    const data = JSON.parse(text);
+    if (!data || !data.amount) return {};
+
+    return {
+      amount: parseFloat(data.amount),
+      date: new Date(data.date),
+      description: data.description,
+      category: data.category,
+      merchantName: data.merchantName,
+    };
   } catch (error) {
     console.error("Error scanning receipt:", error);
     throw new Error("Failed to scan receipt");
