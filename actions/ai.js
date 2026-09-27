@@ -51,23 +51,22 @@ async function runGeminiAgent({ userId, input }) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("Gemini AI is not configured on the server.");
 
-  let previousInteractionId = null;
-  let nextInput = input;
+  let history = [
+    {
+      type: "user_input",
+      content: [{ type: "text", text: input }],
+    },
+  ];
 
   for (let turn = 0; turn < 5; turn += 1) {
     const body = {
       model: GEMINI_MODEL,
-      input: nextInput,
+      input: history,
       tools: FINANCE_TOOL_DEFINITIONS,
+      system_instruction: SYSTEM_PROMPT,
       generation_config: { thinking_level: "medium" },
-      ...(previousInteractionId
-        ? { previous_interaction_id: previousInteractionId }
-        : {}),
+      store: false,
     };
-
-    if (!previousInteractionId) {
-      body.system_instruction = SYSTEM_PROMPT;
-    }
 
     const response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
       method: "POST",
@@ -110,8 +109,8 @@ async function runGeminiAgent({ userId, input }) {
       });
     }
 
-    previousInteractionId = interaction.id;
-    nextInput = results;
+    history.push(...(interaction.steps || []));
+    history.push(...results);
   }
 
   throw new Error("AI tool loop exceeded the safe limit. Please try again.");
